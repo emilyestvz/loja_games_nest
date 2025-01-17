@@ -1,10 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Product } from '../entities/product.entity';
-import { DeleteResult, ILike, Repository } from "typeorm";
+import { DeleteResult, ILike, LessThan, MoreThan, Repository } from "typeorm";
 
 @Injectable()
 export class ProductService {
+    filter(arg0: (product: any) => boolean): Promise<Product[]> {
+        throw new Error("Method not implemented.");
+    }
 
     constructor(
         @InjectRepository(Product)
@@ -67,5 +70,37 @@ export class ProductService {
         await this.findById(id);
         return await this.productRepository.delete(id);
     } 
+
+    // Filtragem por preço maior 
+    //Obs.: MoreThan(value) retorna produtos cujo preço seja maior que value.
+    async findAbovePrice(value: number): Promise<Product[]>{
+        return this.productRepository.find({   // retorna todos os registros correspondentes à condição
+            where: { 
+                price: MoreThan(value)
+            },
+            relations:{
+                category: true
+            },
+            order: {
+                price: 'ASC'  // ordena os resultados em ordem crescente
+            }
+        });
+    }
+
+    // Filtragem por preço Menor
+    //Obs.: LessThan(value) retorna produtos cujo preço seja menor que value.
+    async findBelowPrice(value: number): Promise<Product[]>{
+        return this.productRepository.find({
+            where: {
+                price: LessThan(value)
+            },
+            relations:{
+                category: true
+            },
+            order: {
+                price: 'DESC'
+            }
+        });
+    }
 }
 

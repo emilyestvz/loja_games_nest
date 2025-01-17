@@ -48,5 +48,19 @@ export class ProductController {
         return this.productService.delete(id);
     }
 
+    // Listar todos os produtos cujo o preço seja maior que um valor informado na URL, ordenados em ordem crescente.
+    @Get("/price/:value")
+    @HttpCode(HttpStatus.OK)
+    findAbovePrice(@Param('value') value: number): Promise<Product[]> {
+        return this.productService.findAbovePrice(value);
+    }
+
+    // Listar todos os Produtos cujo preço seja menor que um valor informado na URL, ordenados em ordem decrescente.
+    @Get("/price/desc/:value")
+    @HttpCode(HttpStatus.OK)
+    findBelowPrice(@Param('value') value: number): Promise<Product[]> {
+        return this.productService.findBelowPrice(value);
+    }
+
 
 }
