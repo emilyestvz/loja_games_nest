@@ -1,8 +1,9 @@
 // Model class
 
 import { Transform, TransformFnParams } from "class-transformer";
-import { IsNotEmpty } from "class-validator";
-import { Column, Decimal128, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { IsNotEmpty, IsNumber } from "class-validator";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { NumericTransformer } from "../../util/numericTransformer";
 
 @Entity({name: 'tb_products'})
 export class Product {
@@ -20,9 +21,10 @@ export class Product {
     @Column({length: 1000, nullable: false})
     description: string;
 
+    @IsNumber({ maxDecimalPlaces: 2 })
     @Transform(({ value }: TransformFnParams) => value?.trim())
     @IsNotEmpty()
-    @Column({type:"decimal", precision: 10, scale: 2, nullable:false})
+    @Column({type:"decimal", precision: 10, scale: 2, transformer: new NumericTransformer(),nullable:false})
     price: number;
 
     @IsNotEmpty()
