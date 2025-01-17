@@ -12,13 +12,20 @@ export class ProductService {
     ) {}
 
     async findAll(): Promise<Product[]> {
-        return await this.productRepository.find();
+        return await this.productRepository.find({
+            relations:{
+                category: true
+            }
+        });
     }
 
     // Consultar por ID
     async findById(id: number): Promise<Product> {
         let product = await this.productRepository.findOne({
             where: { id },
+            relations:{
+                category: true
+            }
         });
         
         if (!product) {
@@ -33,7 +40,10 @@ export class ProductService {
         return await this.productRepository.find({
             where: { 
                 name: ILike(`%${name}%`)
-             }
+             },
+             relations:{
+                category: true
+            }
         });
     }
 

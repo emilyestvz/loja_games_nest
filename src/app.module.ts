@@ -3,6 +3,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './product/entities/product.entity';
 import { ProductModule } from './product/product.module';
+import { CategoryModule } from './categories/category.module';
+import { Category } from './categories/entities/category.entity';
 
 @Module({
   imports: [
@@ -13,10 +15,11 @@ import { ProductModule } from './product/product.module';
       username: 'root',
       password: 'root',
       database: 'db_game_ecommerce',
-      entities: [Product],
+      entities: [Product, Category],
       synchronize: true, // Sincroniza as tabelas com os modelos de dados
     }),
-    ProductModule
+    ProductModule,
+    CategoryModule
   ],
   controllers: [],
   providers: [],
