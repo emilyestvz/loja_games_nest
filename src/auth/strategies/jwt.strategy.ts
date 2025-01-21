@@ -17,3 +17,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         return payload;
     }
 }
+
+/*payload: é um Objeto JSON, que contém as declarações do Token JWT, definidas no padrão JSON WEB Token. 
+As declarações são as informações sobre uma entidade (normalmente, o usuário) e alguns dados adicionais */

@@ -45,3 +45,16 @@ export class AuthService {
 
     }
 }
+
+/* Comentários finais:
+- Classe Bcrypt: Serviço do módulo Auth responsável por verificar se o atributo senha do objeto da 
+classe UsuarioLogin (senha não criptografada) corresponde ao atributo senha do objeto da classe Usuario (senha criptografada) armazenado no banco de dados.
+- O Método validateUser(usuario: string, senha: string) será responsável por validar os Atributos usuario (e-mail) e a senha enviados no Objeto UsuarioLogin. 
+Caso os dados dos 2 Atributos sejam validados, o usuário será autenticado.
+- O método login(usuarioLogin: UsuarioLogin) será responsável por receber as credenciais do usuário e enviá-las ao Passport para autenticar (fazer login) 
+e validar o usuário na aplicação. Este método é essencial para o funcionamento do Passport, pois, sem a autenticação, não será possível gerar o Token JWT nem obter acesso aos endpoints protegidos. 
+- Nessas linhas, criaremos o corpo da resposta para a autenticação bem-sucedida, no formato JSON. 
+O objeto JSON conterá todos os atributos encontrados na busca do objeto Usuario, 
+exceto a senha e o Token, que será gerado pelo método jwtService.sign(payload).
+
+*/

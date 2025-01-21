@@ -9,6 +9,7 @@ export class AuthController {
     
     constructor(private authService: AuthService){}
 
+    // Endpoint para autentificar o usuário no login
     @UseGuards(LocalAuthGuard)
     @HttpCode(HttpStatus.OK)
     @Post('/login')
