@@ -5,6 +5,9 @@ import { Product } from './product/entities/product.entity';
 import { ProductModule } from './product/product.module';
 import { CategoryModule } from './categories/category.module';
 import { Category } from './categories/entities/category.entity';
+import { AuthModule } from './auth/auth.module';
+import { User } from './user/entities/user.entity';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -15,11 +18,13 @@ import { Category } from './categories/entities/category.entity';
       username: 'root',
       password: 'root',
       database: 'db_game_ecommerce',
-      entities: [Product, Category],
+      entities: [Product, Category, User],
       synchronize: true, // Sincroniza as tabelas com os modelos de dados
     }),
     ProductModule,
-    CategoryModule
+    CategoryModule,
+    AuthModule,
+    UserModule
   ],
   controllers: [],
   providers: [],

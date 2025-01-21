@@ -6,7 +6,7 @@ import { DeleteResult, ILike, LessThan, MoreThan, Repository } from "typeorm";
 @Injectable()
 export class ProductService {
     filter(arg0: (product: any) => boolean): Promise<Product[]> {
-        throw new Error("Method not implemented.");
+        throw new Error('Method not implemented.');
     }
 
     constructor(
@@ -17,7 +17,8 @@ export class ProductService {
     async findAll(): Promise<Product[]> {
         return await this.productRepository.find({
             relations:{
-                category: true
+                category: true,
+                user: true
             }
         });
     }
@@ -27,12 +28,13 @@ export class ProductService {
         let product = await this.productRepository.findOne({
             where: { id },
             relations:{
-                category: true
+                category: true,
+                user: true
             }
         });
         
         if (!product) {
-            throw new Error("Product not found!");
+            throw new Error('Product not found!');
         }
         
         return product;
@@ -45,7 +47,8 @@ export class ProductService {
                 name: ILike(`%${name}%`)
              },
              relations:{
-                category: true
+                category: true,
+                user: true
             }
         });
     }
@@ -79,7 +82,8 @@ export class ProductService {
                 price: MoreThan(value)
             },
             relations:{
-                category: true
+                category: true,
+                user: true
             },
             order: {
                 price: 'ASC'  // ordena os resultados em ordem crescente
@@ -95,7 +99,8 @@ export class ProductService {
                 price: LessThan(value)
             },
             relations:{
-                category: true
+                category: true,
+                user: true
             },
             order: {
                 price: 'DESC'

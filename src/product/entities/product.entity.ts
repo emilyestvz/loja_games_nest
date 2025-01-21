@@ -5,6 +5,7 @@ import { IsNotEmpty, IsNumber } from "class-validator";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { NumericTransformer } from "../../util/numericTransformer";
 import { Category } from "../../categories/entities/category.entity";
+import { User } from "../../user/entities/user.entity";
 
 @Entity({name: 'tb_products'})
 export class Product {
@@ -44,4 +45,9 @@ export class Product {
     })
     category: Category;
 
+    // Criação do segundo Relacionamento ManytoOne N:1 com a classe Usuario
+   @ManyToOne(() => User, (user) => user.product, {
+     onDelete: "CASCADE" 
+   })
+   user: User;
 }
