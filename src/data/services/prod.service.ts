@@ -14,7 +14,7 @@ export class ProdService implements TypeOrmOptionsFactory {
       ssl: {
         rejectUnauthorized: false,
       },
-      synchronize: true,
+      synchronize: process.env.NODE_ENV !== 'production', // Cuidado em produção,
       autoLoadEntities: true,
     };
   }
